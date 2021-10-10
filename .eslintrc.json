@@ -1,0 +1,97 @@
+{
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "extends": [
+    "eslint:recommended",
+    "standard-with-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:boundaries/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "boundaries", "prettier"],
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "import/no-duplicates": "off",
+    "prettier/prettier": "error",
+    "boundaries/element-types": [
+      2,
+      {
+        "default": "disallow",
+        "rules": [
+          {
+            "from": "entities",
+            "allow": ["entities"]
+          },
+          {
+            "from": "usecases",
+            "allow": ["entities", "usecases"]
+          },
+          {
+            "from": "adapters",
+            "allow": ["entities", "usecases", "adapters"]
+          },
+          {
+            "from": "external",
+            "allow": ["entities", "usecases", "adapters", "external"]
+          },
+          {
+            "from": "main",
+            "allow": ["entities", "usecases", "adapters", "external", "main"]
+          },
+          {
+            "from": "shared",
+            "allow": [
+              "entities",
+              "usecases",
+              "adapters",
+              "external",
+              "main",
+              "shared"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "boundaries/elements": [
+      {
+        "type": "entities",
+        "pattern": "entities/*"
+      },
+      {
+        "type": "usecases",
+        "pattern": "usecases/*"
+      },
+      {
+        "type": "adapters",
+        "pattern": "adapters/*"
+      },
+      {
+        "type": "external",
+        "pattern": "external/*"
+      },
+      {
+        "type": "main",
+        "pattern": "main/*"
+      },
+      {
+        "type": "shared",
+        "pattern": "shared/*"
+      }
+    ],
+    "boundaries/ignore": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}
