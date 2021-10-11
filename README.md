@@ -36,3 +36,5 @@
 [^4]: Uma location pode equivaler a uma página em um ebook, por exemplo.
 
 ### Documentação
+
+- [Arquitetura](./docs/c4model.md)
