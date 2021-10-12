@@ -2,7 +2,7 @@
 
 ## Desenvolvedores Backend - The Pilgrim
 
-![](./docs/images/jorge-luis-ojeda-flota-FqtgyYgBLyQ-unsplash.jpg)[^1]
+![](./docs/images/jorge-luis-ojeda-flota-FqtgyYgBLyQ-unsplash.jpg) [^1]
 
 ### Sumário
 
