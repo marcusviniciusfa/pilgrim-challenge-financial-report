@@ -9,11 +9,18 @@
     "removeComments": true,
     "strict": false,
     "allowJs": true,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["*"]
     }
   },
-  "include": ["src/**/*", "tests/**/*", "*.config.js", "*-config.js"],
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "*.config.js",
+    "*-config.js",
+    "jest.config.ts"
+  ],
   "exclude": [],
   "ts-node": {
     "ignore": ["node_modules"]

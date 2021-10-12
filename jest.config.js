@@ -3,14 +3,21 @@
  * https://jestjs.io/docs/configuration
  */
 
+// const { pathsToModuleNameMapper } = require('ts-jest/utils')
+// const { compilerOptions } = require('./tsconfig.json')
+
 module.exports = {
-  rootDir: './src',
+  roots: ['<rootDir>/tests/'],
   bail: 1,
   moduleFileExtensions: ['ts', 'js'],
-  preset: 'ts-jest',
+  preset: '@shelf/jest-mongodb',
   testMatch: ['**/?(*.)+(spec|test).[jt]s'],
   testEnvironment: 'node',
+  // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
   moduleNameMapper: {
-    '@/(.*)': '<rootDir>/src/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  transform: {
+    '\\.ts$': 'ts-jest',
   },
 }
