@@ -1,5 +1,5 @@
 {
   "*.{spec.ts, test.ts}": ["npm run test"],
-  "./src": ["npm run compile"],
+  "./src/**/.ts": ["npm run compile"],
   "*.ts": ["npm run lint"]
 }
