@@ -12,10 +12,10 @@
   "scripts": {
     "dev": "ts-node-dev -r dotenv/config --respawn --transpile-only ./src/index.ts",
     "start": "rm -rf ./dist && tsc && node -r dotenv/config ./dist/index.js",
-    "lint": "npm run compile && npx eslint --fix . && npx prettier --write .",
+    "lint": "npx eslint --fix . && npx prettier --write .",
     "test": "npx jest --passWithNoTests",
     "test:watch": "npx jest --passWithNoTests --watchAll",
-    "compile": "tsc --outDir ./tmp && rm -rf ./tmp",
+    "compile": "tsc -p tsconfig.eslint.json --outDir ./tmp && rm -rf ./tmp",
     "commit": "commit"
   },
   "devDependencies": {

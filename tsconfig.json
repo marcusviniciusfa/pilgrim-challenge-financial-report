@@ -3,18 +3,18 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "target": "es5",
     "module": "commonjs",
-    "rootDir": "./src",
-    "baseUrl": "./src",
-    "outDir": "./dist",
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "outDir": "dist",
     "removeComments": true,
     "strict": false,
-    "allowJs": false,
+    "allowJs": true,
     "paths": {
       "@/*": ["*"]
     }
   },
-  "include": ["./src", "**/*.config.js"],
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "include": ["src/**/*", "tests/**/*", "*.config.js", "*-config.js"],
+  "exclude": [],
   "ts-node": {
     "ignore": ["node_modules"]
   }

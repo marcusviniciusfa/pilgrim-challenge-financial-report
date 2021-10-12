@@ -1,8 +1,5 @@
 {
-  "*.ts": [
-    "npm run test",
-    "npm run compile",
-    "npx eslint --fix",
-    "npx prettier --write"
-  ]
+  "*.{spec.ts, test.ts}": ["npm run test"],
+  "./src": ["npm run compile"],
+  "*.ts": ["npm run lint"]
 }
