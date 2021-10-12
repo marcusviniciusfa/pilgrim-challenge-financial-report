@@ -1,17 +1,5 @@
 import mongoose from 'mongoose'
 
-class MongoDB {
-  public readonly connection
-  private readonly uri
+mongoose.connect(`${process.env.MONGO_URI}/${process.env.MONGO_DB_NAME}`)
 
-  constructor(uri: string = process.env.MONGO_URI) {
-    this.uri = uri
-    this.connection = this.connect()
-  }
-
-  async connect(): Promise<mongoose.Mongoose> {
-    return await mongoose.connect(this.uri)
-  }
-}
-
-export default MongoDB
+export default mongoose

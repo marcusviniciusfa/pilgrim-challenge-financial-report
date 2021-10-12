@@ -1,42 +1,58 @@
-import MongoDB from '@/models/dbConnection'
-import Product from '@/models/schemas/Product'
+import { IConsumption, IProduct } from '@/models/IProduct'
+import mongoose from 'mongoose'
 import { v4 as uuid4 } from 'uuid'
 
-const mongodb = new MongoDB(process.env.MONGO_URL)
+function defaultConsumption(): IConsumption {
+  return {
+    start: 0,
+    end: 0,
+    lastTime: '',
+  }
+}
 
-describe('Name of the group', () => {
-  let connection
-  let productModel
+describe('Test database connection', () => {
+  let db
+  let ProductSchema
+  let ProductModel
 
   beforeAll(async () => {
-    connection = await mongodb.connect()
-    productModel = Product
+    db = await mongoose.connect(process.env.MONGO_URL)
+
+    ProductSchema = new mongoose.Schema({
+      _id: { type: String, default: uuid4, immutable: true },
+      title: String,
+      distributor: String,
+      locations: Number,
+      price: Number,
+      consumption: { type: Object, default: defaultConsumption },
+    })
+
+    ProductModel = mongoose.model('Product', ProductSchema)
   })
 
-  afterAll(async () => {
-    await connection.disconnect()
+  beforeEach(async () => {
+    ProductModel.deleteMany()
   })
 
-  it('should ', async () => {
-    const id = uuid4()
-
-    const mockProducts = {
-      __v: 0,
-      _id: id,
+  it('should insert a product into the database', async () => {
+    const mockProducts: IProduct = {
       title: 'Manso e Humilde',
       distributor: 'Pilgrim',
       locations: 1000,
       price: 50.0,
-      createdAt: new Date(),
+      consumption: {
+        start: 0,
+        end: 0,
+        lastTime: '',
+      },
     }
-    const products = new productModel(mockProducts)
+    const products = new ProductModel(mockProducts)
     await products.save()
 
-    const insertedProduct = await productModel.findById(id)
-    expect(insertedProduct._id).toEqual(mockProducts._id)
-  })
+    const insertedProduct = await ProductModel.findOne({
+      title: mockProducts.title,
+    })
 
-  beforeEach(async () => {
-    productModel.deleteMany()
+    expect(insertedProduct.title).toEqual(mockProducts.title)
   })
 })

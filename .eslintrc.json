@@ -3,7 +3,6 @@
     "node": true,
     "jest": true
   },
-  // "ignorePatterns": ["*.config.js", "**/*.spec.ts", "**/*.test.ts"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "tsconfig.json"
@@ -19,6 +18,7 @@
   "plugins": ["@typescript-eslint", "boundaries", "prettier"],
   "rules": {
     "new-cap": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
