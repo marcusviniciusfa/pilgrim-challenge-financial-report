@@ -6,6 +6,12 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces'
 async function reportGenerator(_req: Request, res: Response): Promise<any> {
   const allProducts = await ProductModel.find({})
 
+  const whiteColor = '#FFFFFF'
+  const greyColor = '#D9D9D9'
+  const darkGreyColor = '#707070'
+  const successColor = '#A8FCC0'
+  const warningColor = '#FEAAAA'
+
   const fonts = {
     Times: {
       normal: 'Times-Roman',
@@ -13,17 +19,15 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
       italics: 'Times-Italic',
       bolditalics: 'Times-BoldItalic',
     },
-    Symbol: {
-      normal: 'Symbol',
-    },
   }
 
   const printer = new PdfPrinter(fonts)
 
   const body = []
+  let totalRoyalts = 0
 
   for (const product of allProducts) {
-    const rowColor = allProducts.indexOf(product) % 2 ? '#FFFFFF' : '#D9D9D9'
+    const rowColor = allProducts.indexOf(product) % 2 ? whiteColor : greyColor
 
     const title = product.title
     const distributor = product.distributor
@@ -33,11 +37,12 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
     let royalty = 0
     const threshold = ((locations * 50) / 100).toFixed(0)
 
-    let royaltyColor = '#A8FCC0'
+    let royaltyColor = successColor
 
     if (end >= threshold) {
       royalty = (price * 10) / 100
-      royaltyColor = '#FEAAAA'
+      totalRoyalts += royalty
+      royaltyColor = warningColor
     }
 
     let date = ''
@@ -52,14 +57,30 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
       time = last[1].split('-')[0]
     }
 
-    const row: any = [
+    const dynamicAlignment = (value): string => {
+      return value ? 'left' : 'center'
+    }
+
+    const row = [
       { text: title, fillColor: rowColor },
       { text: distributor, fillColor: rowColor },
       { text: locations, fillColor: rowColor },
       { text: `R$${price.toFixed(2)}`, fillColor: rowColor },
-      { text: end, fillColor: rowColor },
-      { text: date, fillColor: rowColor },
-      { text: time, fillColor: rowColor },
+      {
+        text: end || '-',
+        fillColor: rowColor,
+        alignment: dynamicAlignment(end),
+      },
+      {
+        text: date || '-',
+        fillColor: rowColor,
+        alignment: dynamicAlignment(date),
+      },
+      {
+        text: time || '-',
+        fillColor: rowColor,
+        alignment: dynamicAlignment(time),
+      },
       { text: threshold, fillColor: rowColor },
       {
         text: `R$${royalty.toFixed(2)}`,
@@ -76,13 +97,26 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
         text: 'Relatório Financeiro - The Pilgrim',
         style: 'header',
         bold: true,
-        fontSize: 16,
+        fontSize: 18,
         alignment: 'center',
-        margin: 20,
+        margin: 0,
       },
       {
-        text: 'Documento contendo a relação de produtos e respectivos valores de royalts a serem pagos por consumo.',
+        text: 'Relação entre consumo de produtos e Royalts',
+        style: 'subheader',
+        fontSize: 16,
+        alignment: 'center',
+        margin: 10,
+      },
+      {
+        text: '',
+        margin: 5,
+      },
+      {
+        text: `Débito total: R$${totalRoyalts}`,
         alignment: 'left',
+        bold: true,
+        fontSize: 14,
       },
       {
         text: '',
@@ -94,29 +128,80 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
           headerRows: 1,
           body: [
             [
-              { text: 'Título', bold: true },
-              { text: 'Distribuidor', bold: true },
-              { text: 'Tamanho', bold: true },
-              { text: 'Preço', bold: true },
-              { text: 'Consumo', bold: true },
-              { text: 'Data', bold: true },
-              { text: 'Hora', bold: true },
-              { text: 'Threshold', bold: true },
-              { text: 'Royalts', bold: true },
+              {
+                text: 'Título',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Distribuidor',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Tamanho',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Preço',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Consumo',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Data',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Hora',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Threshold',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
+              {
+                text: 'Royalts',
+                bold: true,
+                alignment: 'center',
+                color: whiteColor,
+                fillColor: darkGreyColor,
+              },
             ],
             ...body,
           ],
         },
       },
     ],
-    pageMargins: [40, 60, 40, 60],
+    pageMargins: [30, 60, 30, 60],
     defaultStyle: { font: 'Times' },
   }
 
-  // const dateTimeSplit = now().split('T')
-  // const date = dateTimeSplit[0]
-  // const time = dateTimeSplit[1].split('-')[0]
-  // const fileName = `financial-report_${date}_${time}.pdf`
+  // const fileName = `financial-report.pdf`
   // const filePath = path.resolve('./reports/', fileName)
   // console.log('[debug]' + filePath)
   const pdfDoc = printer.createPdfKitDocument(docDefinition)
