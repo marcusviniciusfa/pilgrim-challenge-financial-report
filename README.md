@@ -13,10 +13,10 @@
 
 #### Histórias de Usuário
 
-| Como       | Quero                         | Para                                                              |
-| ---------- | ----------------------------- | ----------------------------------------------------------------- |
-| Analisador | Disparar um evento de consumo | Ver os dados salvos imediatamente no banco de dados em tempo real |
-| Analisador | Gerar um relatório financeiro | Ver os dados em um documento PDF                                  |
+| Como    | Quero                         | Para                                                              |
+| ------- | ----------------------------- | ----------------------------------------------------------------- |
+| Usuário | Disparar um evento de consumo | Ver os dados salvos imediatamente no banco de dados em tempo real |
+| Usuário | Gerar um relatório financeiro | Ver os dados em um documento PDF                                  |
 
 [^2]
 

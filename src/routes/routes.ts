@@ -34,6 +34,9 @@ routes.put(
 
 routes.get('/api/products', async (req, res) => await findProducts(req, res))
 
-routes.get('/api/reports', async (req, res) => await reportGenerator(req, res))
+routes.get(
+  '/api/products/reports',
+  async (req, res) => await reportGenerator(req, res)
+)
 
 export default routes
