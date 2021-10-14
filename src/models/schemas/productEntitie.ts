@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
   title: String,
   distributor: String,
   locations: Number,
-  price: Number,
+  price: { type: Number, immutable: true },
   consumption: { type: Object, default: defaultConsumption },
 })
 
