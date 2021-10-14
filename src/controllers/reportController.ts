@@ -24,7 +24,7 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
   const printer = new PdfPrinter(fonts)
 
   const body = []
-  let totalRoyalts = 0
+  let totalRoyalties = 0
 
   for (const product of allProducts) {
     const rowColor = allProducts.indexOf(product) % 2 ? whiteColor : greyColor
@@ -41,7 +41,7 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
 
     if (end >= threshold) {
       royalty = (price * 10) / 100
-      totalRoyalts += royalty
+      totalRoyalties += royalty
       royaltyColor = warningColor
     }
 
@@ -65,7 +65,13 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
       { text: title, fillColor: rowColor },
       { text: distributor, fillColor: rowColor },
       { text: locations, fillColor: rowColor },
-      { text: `R$${price.toFixed(2)}`, fillColor: rowColor },
+      {
+        text: price.toLocaleString('pt-br', {
+          style: 'currency',
+          currency: 'BRL',
+        }),
+        fillColor: rowColor,
+      },
       {
         text: end || '-',
         fillColor: rowColor,
@@ -83,7 +89,10 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
       },
       { text: threshold, fillColor: rowColor },
       {
-        text: `R$${royalty.toFixed(2)}`,
+        text: royalty.toLocaleString('pt-br', {
+          style: 'currency',
+          currency: 'BRL',
+        }),
         fillColor: royaltyColor,
       },
     ]
@@ -102,7 +111,7 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
         margin: 0,
       },
       {
-        text: 'Relação entre consumo de produtos e Royalts',
+        text: 'Relação entre o consumo de produtos e Royalties',
         style: 'subheader',
         fontSize: 16,
         alignment: 'center',
@@ -113,7 +122,10 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
         margin: 5,
       },
       {
-        text: `Débito total: R$${totalRoyalts}`,
+        text: `Total de Royalties: ${totalRoyalties.toLocaleString('pt-br', {
+          style: 'currency',
+          currency: 'BRL',
+        })}`,
         alignment: 'left',
         bold: true,
         fontSize: 14,
@@ -143,7 +155,7 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
                 fillColor: darkGreyColor,
               },
               {
-                text: 'Tamanho',
+                text: 'Locations',
                 bold: true,
                 alignment: 'center',
                 color: whiteColor,
@@ -185,7 +197,7 @@ async function reportGenerator(_req: Request, res: Response): Promise<any> {
                 fillColor: darkGreyColor,
               },
               {
-                text: 'Royalts',
+                text: 'Royalties',
                 bold: true,
                 alignment: 'center',
                 color: whiteColor,

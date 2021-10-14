@@ -49,17 +49,6 @@
           {
             "from": "main",
             "allow": ["entities", "usecases", "adapters", "external", "main"]
-          },
-          {
-            "from": "shared",
-            "allow": [
-              "entities",
-              "usecases",
-              "adapters",
-              "external",
-              "main",
-              "shared"
-            ]
           }
         ]
       }
@@ -86,10 +75,6 @@
       {
         "type": "main",
         "pattern": "main/*"
-      },
-      {
-        "type": "shared",
-        "pattern": "shared/*"
       }
     ],
     "boundaries/ignore": ["src/**/*.spec.ts", "src/**/*.test.ts"],
