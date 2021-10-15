@@ -1,5 +1,4 @@
 import ProductModel from '@/models/schemas/productEntitie'
-import { now } from '@/utils/moment'
 import { Request, Response } from 'express'
 
 async function addProduct(req: Request, res: Response): Promise<any> {
@@ -15,7 +14,7 @@ async function addProducts(req: Request, res: Response): Promise<any> {
 
 async function updateProduct(req: Request, res: Response): Promise<any> {
   if (req.body.consumption) {
-    req.body.consumption.lastTime = now()
+    req.body.consumption.lastTime = new Date().toLocaleString()
   }
   const updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id, {
     $set: { ...req.body },
@@ -32,7 +31,7 @@ async function updateConsumption(req: Request, res: Response): Promise<any> {
       consumption: {
         start: oldConsumption.end,
         end: Number(oldConsumption.end) + Number(req.body.consumption),
-        lastTime: now(),
+        lastTime: new Date().toLocaleString(),
       },
     },
   })

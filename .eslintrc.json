@@ -35,20 +35,20 @@
             "allow": ["entities"]
           },
           {
-            "from": "usecases",
-            "allow": ["entities", "usecases"]
+            "from": "use-cases",
+            "allow": ["entities", "use-cases"]
           },
           {
             "from": "adapters",
-            "allow": ["entities", "usecases", "adapters"]
+            "allow": ["entities", "use-cases", "adapters"]
           },
           {
             "from": "external",
-            "allow": ["entities", "usecases", "adapters", "external"]
+            "allow": ["entities", "use-cases", "adapters", "external"]
           },
           {
             "from": "main",
-            "allow": ["entities", "usecases", "adapters", "external", "main"]
+            "allow": ["entities", "use-cases", "adapters", "external", "main"]
           }
         ]
       }
@@ -58,11 +58,11 @@
     "boundaries/elements": [
       {
         "type": "entities",
-        "pattern": "entities/*"
+        "pattern": "entities/**/*"
       },
       {
-        "type": "usecases",
-        "pattern": "usecases/*"
+        "type": "use-cases",
+        "pattern": "use-cases/*"
       },
       {
         "type": "adapters",

@@ -6,10 +6,8 @@ workspace {
 
     softwareSystem = softwareSystem "Financial Report" "System for storing product consumption data and generating financial reports " {
       api = container "API Application" "REST API accessed by the user via HTTP request" "NodeJS" "API Application" {
-        reportGenerateController = component "Report Generate Controller"
-        reportGenerateEntitie = component "Report Generate Entitie"
-        addConsumptionController = component "Add Consumption Controller"
-        addConsumptionEntitie = component "Add Consumption Entitie"
+        productController = component "Product Controller" "Add, update, and query product data "
+        reportController = component "Report Controller" "Fetch data for specified report type, generate and send a new report"
       }
       database = container "Database" "Stores product data for use in generating financial reports" "MongoDB" "Database"
     }
@@ -18,11 +16,8 @@ workspace {
     api -> internalUser "HTTP Response"
     externalUser -> api "HTTP Request: POST"
 
-    reportGenerateController -> reportGenerateEntitie "Uses"
-    reportGenerateEntitie -> database "Read"
-
-    addConsumptionController -> addConsumptionEntitie "Uses"
-    addConsumptionEntitie -> database "Write"
+    productController -> database "Uses"
+    reportController -> database "Uses"
   }
 
   views {
