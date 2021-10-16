@@ -1,19 +1,22 @@
+import { Router } from 'express'
+import swaggerUi from 'swagger-ui-express'
+import swaggerDocs from '../../docs/swagger.json'
 import {
   addProduct,
   addProducts,
   findProducts,
+  incrementConsumption,
   updateConsumption,
-  // eslint-disable-next-line prettier/prettier
-  updateProduct,
-} from '@/controllers/productController'
-import { reportGenerator } from '@/controllers/reportController'
-import { Router } from 'express'
+} from '../controllers/productController'
+import { reportGenerator } from '../controllers/reportController'
 
 const routes = Router()
 
 routes.get('/', (_req, res) => {
   res.status(200).send('Ok!')
 })
+
+routes.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 routes.post(
   '/api/products/product',
@@ -22,21 +25,18 @@ routes.post(
 
 routes.post('/api/products/', async (req, res) => await addProducts(req, res))
 
+routes.get('/api/products', async (req, res) => await findProducts(req, res))
+
 routes.put(
-  '/api/products/product/:id',
-  async (req, res) => await updateProduct(req, res)
+  '/api/products/:id',
+  async (req, res) => await updateConsumption(req, res)
 )
 
 routes.put(
   '/api/products/product/consumption/:id',
-  async (req, res) => await updateConsumption(req, res)
+  async (req, res) => await incrementConsumption(req, res)
 )
 
-routes.get('/api/products', async (req, res) => await findProducts(req, res))
-
-routes.get(
-  '/api/products/reports',
-  async (req, res) => await reportGenerator(req, res)
-)
+routes.get('/api/reports', async (req, res) => await reportGenerator(req, res))
 
 export default routes

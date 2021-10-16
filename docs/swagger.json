@@ -1,0 +1,297 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "API para geração de relatórios financeiros",
+    "description": "Serviço para gerar relatórios financeiros relacionados ao consumo de produtos da Pilgrim",
+    "contact": {
+      "email": "marcusviniciusfabr@gmail.com",
+      "name": "the developer"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "API de testes"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "Rota utilizada apenas para verificar que o serviço está online",
+        "summary": "Raiz do serviço",
+        "tags": ["Root"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/api/products/product": {
+      "post": {
+        "description": "Rota para adicionar um Produto cadastrado no Banco de Dados",
+        "summary": "Para adicionar um Produto",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "title": "Manso e Humilde",
+                    "distributor": "Dane Ortlund",
+                    "locations": 790,
+                    "price": 20.99
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/products": {
+      "post": {
+        "description": "Rota para adicionar vários Produtos cadastrados no Banco de Dados",
+        "summary": "Para adicionar n Produtos",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Product"
+              },
+              "examples": {
+                "product": {
+                  "value": [
+                    {
+                      "title": "Manso e Humilde",
+                      "distributor": "Dane Ortlund",
+                      "locations": 790,
+                      "price": 20.99
+                    },
+                    {
+                      "title": "Liturgia do Ordinário",
+                      "distributor": "Tish H. Warren",
+                      "locations": 1000,
+                      "price": 50
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "get": {
+        "description": "Rota para realizar a busca por todos os Produtos cadastrados no Banco de Dados",
+        "summary": "Para buscar todos os Produtos",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/products/{id}:": {
+      "put": {
+        "description": "Rota para atualizar o consumo de produtos cadastrados no Banco de Dados",
+        "summary": "Para tualizar o consumo de um produto",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id de um produto",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Consumption"
+              },
+              "examples": {
+                "product": {
+                  "value": [
+                    {
+                      "consumption": {
+                        "start": 200,
+                        "end": 500
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/products/product/consumption/{id}:": {
+      "put": {
+        "description": "Rota para incrementar o valor do consumo de um Produto cadastrado no Banco de Dados",
+        "summary": "Para incrementar o valor do consumo (product.consumption.end)",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id de um produto",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Consumption"
+              },
+              "examples": {
+                "product": {
+                  "value": [
+                    {
+                      "consumption": 200
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/reports?type=products": {
+      "get": {
+        "description": "Rota para gerar um Relatório Financeiro utilizando os dados de Produtos cadastrado no Banco de Dados",
+        "summary": "Para gerar um novo Relatório Financeiro",
+        "tags": ["Reports"],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Tipo de Relatório Financeiro: `type=products` ou `type=distributors`",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string" },
+          "distributor": { "type": "string" },
+          "locations": { "type": "number" },
+          "price": { "type": "number" },
+          "consumption": {
+            "properties": {
+              "start": { "type": "number" },
+              "end": { "type": "number" },
+              "lastTime": { "type": "string" }
+            }
+          }
+        }
+      },
+
+      "Consumption": {
+        "type": "object",
+        "properties": {
+          "start": { "type": "number" },
+          "end": { "type": "number" },
+          "lastTime": { "type": "string" }
+        }
+      }
+    }
+  }
+}

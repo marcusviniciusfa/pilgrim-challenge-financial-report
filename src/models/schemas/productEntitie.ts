@@ -1,13 +1,13 @@
 import { v4 as uuid4 } from 'uuid'
 import mongoose from '../dbConnection'
 
-interface Consumption {
+interface IConsumption {
   start: number
   end: number
   lastTime: string
 }
 
-function defaultConsumption(): Consumption {
+function defaultConsumption(): IConsumption {
   return {
     start: 0,
     end: 0,

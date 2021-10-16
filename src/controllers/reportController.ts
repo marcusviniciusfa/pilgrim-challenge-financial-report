@@ -1,8 +1,8 @@
-import ProductModel from '@/models/schemas/productEntitie'
-import reportDistributorsGenerate from '@/utils/reportDistributorsGenerate'
-import reportProductsGenerate from '@/utils/reportProductsGenerate'
 import { Request, Response } from 'express'
 import PdfPrinter from 'pdfmake'
+import ProductModel from '../models/schemas/productEntitie'
+import reportDistributorsGenerate from '../utils/reportDistributorsGenerate'
+import reportProductsGenerate from '../utils/reportProductsGenerate'
 
 async function reportGenerator(req: Request, res: Response): Promise<any> {
   const allProducts = await ProductModel.find({})
@@ -44,7 +44,7 @@ async function reportGenerator(req: Request, res: Response): Promise<any> {
   pdfDoc.on('end', () => {
     const file = Buffer.concat(chunks)
     console.log('Financial report generated successfully!')
-    return res.status(201).end(file)
+    return res.status(200).end(file)
   })
 }
 

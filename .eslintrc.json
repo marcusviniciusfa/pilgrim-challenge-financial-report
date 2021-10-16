@@ -11,11 +11,10 @@
     "eslint:recommended",
     "standard-with-typescript",
     "plugin:@typescript-eslint/recommended",
-    "plugin:boundaries/recommended",
     "prettier",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "boundaries", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "new-cap": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
@@ -24,64 +23,11 @@
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "import/no-duplicates": "off",
-    "prettier/prettier": "error",
-    "boundaries/element-types": [
-      2,
-      {
-        "default": "disallow",
-        "rules": [
-          {
-            "from": "entities",
-            "allow": ["entities"]
-          },
-          {
-            "from": "use-cases",
-            "allow": ["entities", "use-cases"]
-          },
-          {
-            "from": "adapters",
-            "allow": ["entities", "use-cases", "adapters"]
-          },
-          {
-            "from": "external",
-            "allow": ["entities", "use-cases", "adapters", "external"]
-          },
-          {
-            "from": "main",
-            "allow": ["entities", "use-cases", "adapters", "external", "main"]
-          }
-        ]
-      }
-    ]
-  },
-  "settings": {
-    "boundaries/elements": [
-      {
-        "type": "entities",
-        "pattern": "entities/**/*"
-      },
-      {
-        "type": "use-cases",
-        "pattern": "use-cases/*"
-      },
-      {
-        "type": "adapters",
-        "pattern": "adapters/*"
-      },
-      {
-        "type": "external",
-        "pattern": "external/*"
-      },
-      {
-        "type": "main",
-        "pattern": "main/*"
-      }
-    ],
-    "boundaries/ignore": ["src/**/*.spec.ts", "src/**/*.test.ts"],
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    }
+    "prettier/prettier": "error"
+    // "import/resolver": {
+    //   "typescript": {
+    //     "alwaysTryTypes": true
+    //   }
+    // }
   }
 }

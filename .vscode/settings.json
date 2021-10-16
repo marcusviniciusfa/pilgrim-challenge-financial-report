@@ -1,9 +1,7 @@
 {
   // Lint config
-  "eslint.validate": ["typescript"],
   "eslint.run": "onType",
 
-  "eslint.format.enable": false,
   "prettier.enable": true,
   "editor.formatOnType": false,
   "editor.formatOnPaste": false,
@@ -32,5 +30,12 @@
   "[jsonc]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Material icons config
+  // Press Ctrl + Shift + P and type settings.json
+  // Add the configuration below to the VSCode user settings
+  "material-icon-theme.files.associations": {
+    "swagger.json": "lib"
   }
 }
