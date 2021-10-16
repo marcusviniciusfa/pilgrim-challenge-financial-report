@@ -91,7 +91,7 @@ git clone https://github.com/marcusviniciusfa/pilgrim-challenge-financial-report
 
 - Utilizei configurações do VSCode para auxiliar na utilização de outras ferramentas e fazer Debug
 
-- Vou dar continuidade nos meus estudos sobre Arquitetura e Código Limpo, utilizando este projeto, através dos materiais (Cursos, vídeos no Youtube, Livros) de grandes feras como [Otavio Lemos](https://www.linkedin.com/in/otavio-lemos-0271399/), [Rodrigo Manguinho](https://www.linkedin.com/in/rmanguinho/), [Uncle Bob](https://www.google.com/search?q=uncle+bob+books&oq=uncle+bob+books&aqs=edge..69i57j0i22i30l7.3892j0j1&sourceid=chrome&ie=UTF-8)
+- Vou dar continuidade nos meus estudos sobre Arquitetura e Código Limpo, utilizando este projeto, através dos materiais (Cursos, vídeos no Youtube, Livros) de grandes feras como o [Pessoal da Rocketseat](https://www.rocketseat.com.br/), [Otavio Lemos](https://www.linkedin.com/in/otavio-lemos-0271399/), [Rodrigo Manguinho](https://www.linkedin.com/in/rmanguinho/), [Uncle Bob](https://www.google.com/search?q=uncle+bob+books&oq=uncle+bob+books&aqs=edge..69i57j0i22i30l7.3892j0j1&sourceid=chrome&ie=UTF-8)
 
 [^1]: Fonte: https://unsplash.com/photos/FqtgyYgBLyQ
 [^2]: Como (ator); Quero (ação); Para (funcionalidade).
