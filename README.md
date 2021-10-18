@@ -83,7 +83,7 @@ git clone https://github.com/marcusviniciusfa/pilgrim-challenge-financial-report
 
 - Tentei iniciar com TDD mais não dei continuidade por questão de tempo e falta de maturidade no uso do Jest
 
-- Utilizei o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/#resumo), com a ajuda dos modulos [commitlint](https://commitlint.js.org/#/) e [husky](https://typicode.github.io/husky/#/), além do [lintstaged](https://github.com/okonet/lint-staged) para auxiliar na automatização das verificações.
+- Utilizei o padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/#resumo), com a ajuda dos módulos [commitlint](https://commitlint.js.org/#/) e [husky](https://typicode.github.io/husky/#/), além do [lintstaged](https://github.com/okonet/lint-staged) para auxiliar na automatização das verificações.
 
 - Utilizei o [ESLint](https://eslint.org/), [Prettier](https://prettier.io/) e o [.editorconfig](https://editorconfig.org/) para seguir bons padrões e formatação de código
 
