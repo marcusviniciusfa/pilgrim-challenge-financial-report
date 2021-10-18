@@ -8,6 +8,8 @@
 
 1. [MVP](#MVP---Geração-de-relatório-financeiro)
 1. [Documentação](#Documentação)
+1. [Execute localmente](#Execute-localmente)
+1. [Observações](#Observações)
 
 ### MVP - Geração de relatório financeiro
 
